@@ -1,0 +1,70 @@
+{
+  "name": "send-to-speedio",
+  "publisher": "Ken Robertson",
+  "displayName": "Send to Speedio",
+  "description": "Send NC programs to your Brother Speedio",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.71.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:send-to-speedio.send"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "send-to-speedio.send",
+        "title": "Send to Speedio"
+      }
+    ],
+    "configuration": {
+      "title": "Send to Speedio",
+      "properties": {
+        "send-to-speedio.ipAddress": {
+          "type": "string",
+          "markdownDescription": "Specifies the IP address of the machine to connect to"
+        },
+        "send-to-speedio.port": {
+          "type": "number",
+          "default": 10000,
+          "markdownDescription": "Specifies the port number for the NC communication (defaults to 10000)"
+        },
+        "send-to-speedio.controller": {
+          "type": "string",
+          "default": "C00",
+          "enum": [
+            "A00",
+            "B00",
+            "C00"
+          ],
+          "markdownDescription": "Specify the controller version on the machine"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.71.0",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "typescript": "^4.7.4",
+    "@vscode/test-electron": "^2.1.5"
+  }
+}
